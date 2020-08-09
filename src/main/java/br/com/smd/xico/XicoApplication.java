@@ -8,6 +8,7 @@ public class XicoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(XicoApplication.class, args);
+		System.out.println("Application started!");
 	}
 
 }
