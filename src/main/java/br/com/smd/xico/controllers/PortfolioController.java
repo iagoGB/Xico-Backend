@@ -3,6 +3,7 @@ package br.com.smd.xico.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import br.com.smd.xico.dto.PortfolioTO;
 import br.com.smd.xico.services.PortfolioService;
 
 @Controller
+@CrossOrigin
 @RequestMapping("/portfolio")
 public class PortfolioController {
     @Autowired 
@@ -26,7 +28,7 @@ public class PortfolioController {
     ){
         return this.portfolioService.save(images, portfolioTO);
     }
-
+   
     @GetMapping("{id}/images/{fileName:.+}")
     public ResponseEntity<?> downloadImage(
         @PathVariable(value ="id") Long portfolioID,

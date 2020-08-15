@@ -2,13 +2,12 @@ package br.com.smd.xico.models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -33,18 +32,21 @@ public class PortfolioModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private Integer likes;
+    @ElementCollection
+    @Column(name="user_id")
+    @CollectionTable(name="portfolio_likes", joinColumns = @JoinColumn(name = "portfolio_id")) 
+    private List<Long> likes;
     private LocalDate date;
     @ElementCollection
     @CollectionTable(name = "portfolio_tags", joinColumns = @JoinColumn(name = "portfolio_id"))
     @Enumerated(EnumType.STRING)
     private List<Tag> tags;
     @ElementCollection
-    @CollectionTable(name = "portfolio_images", joinColumns = @JoinColumn(name = "portfolio_id"))
-    private List<String> images;
+    @CollectionTable(name = "portfolio_files", joinColumns = @JoinColumn(name = "portfolio_id"))
+    private List<String> files;
 
     public static PortfolioModel parse(PortfolioTO pto){
-        return new PortfolioModel(null, pto.getTitle(), 0, pto.getDate(),pto.getTags(), new ArrayList<String>());
+        return new PortfolioModel(null, pto.getTitle(), new ArrayList<Long>(), pto.getDate(),pto.getTags(), new ArrayList<String>());
     }
 
 }
