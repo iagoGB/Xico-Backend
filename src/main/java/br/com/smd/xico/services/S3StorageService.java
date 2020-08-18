@@ -38,8 +38,8 @@ public class S3StorageService  {
         String resourceUrl = null;
         try {
             AWSCredentials credentials = new BasicAWSCredentials(
-            this.ACCESSKEY,
-            this.SECRETKEY
+                this.ACCESSKEY,
+                this.SECRETKEY
             );
             AmazonS3Client s3client = (AmazonS3Client) AmazonS3ClientBuilder
                 .standard()

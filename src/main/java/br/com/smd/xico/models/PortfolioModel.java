@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import br.com.smd.xico.dto.PortfolioTO;
 import br.com.smd.xico.utils.Tag;
@@ -44,9 +45,11 @@ public class PortfolioModel {
     @ElementCollection
     @CollectionTable(name = "portfolio_files", joinColumns = @JoinColumn(name = "portfolio_id"))
     private List<String> files;
+    @ManyToOne
+    private UserModel user;
 
     public static PortfolioModel parse(PortfolioTO pto){
-        return new PortfolioModel(null, pto.getTitle(), new ArrayList<Long>(), pto.getDate(),pto.getTags(), new ArrayList<String>());
+        return new PortfolioModel(null, pto.getTitle(), new ArrayList<Long>(), pto.getDate(),pto.getTags(), new ArrayList<String>(),null);
     }
 
 }

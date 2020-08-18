@@ -13,7 +13,7 @@ public enum Tag {
 
     private String value;
 
-    Tag(final String tag) {
+    Tag(String tag) {
         this.value = tag;
     }
 }
