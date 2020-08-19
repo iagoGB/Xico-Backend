@@ -49,7 +49,7 @@ public class PortfolioModel {
     private UserModel user;
 
     public static PortfolioModel parse(PortfolioTO pto){
-        return new PortfolioModel(null, pto.getTitle(), new ArrayList<Long>(), pto.getDate(),pto.getTags(), new ArrayList<String>(),null);
+        return new PortfolioModel(null, pto.getTitle(), new ArrayList<Long>(), pto.getDate(),pto.getTags(), pto.getFiles(),null);
     }
 
 }

@@ -1,6 +1,7 @@
 package br.com.smd.xico.models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CollectionTable;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import br.com.smd.xico.dto.UserTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,4 +39,18 @@ public class UserModel {
     private List<String> tools;
     @OneToMany(mappedBy = "user")
     private List<PortfolioModel> projects;
+
+    public static UserModel parse(UserTO userTO){
+        return new UserModel(
+            null,
+            userTO.getName(),
+            null,
+            userTO.getEmail(),
+            userTO.getPassword(),
+            userTO.getDescription(),
+            userTO.getEntryDate(),
+            userTO.getTools(),
+            new ArrayList<PortfolioModel>()
+        );
+    }
 }
