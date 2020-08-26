@@ -30,7 +30,7 @@ public class PortfolioService {
         var user =  userRepository.findById(portfolioTO.getUserID());
         var portolioModel = PortfolioModel.parse(portfolioTO);
         portolioModel.setUser(user.get());
-        PortfolioModel saved = portfolioRespository.save(portolioModel);
+        portfolioRespository.save(portolioModel);
         // for (MultipartFile image : images) {
         //     String imageSavedPath = s3storageService.salvarImagem(image, saved.getId(), this.PORTFOLIOSTORAGEPATH);
         //     saved.getFiles().add(imageSavedPath);
