@@ -40,12 +40,13 @@ public class UserModel implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String lastName;
     private String image;
     @Column(unique = true)
     private String email;
     private String password;
     private String description;
-    private LocalDate entryDate;
+    private String entryDate;
     @ElementCollection
     @CollectionTable(name = "user_tools", joinColumns = @JoinColumn(name = "user_id"))
     private List<String> tools;
@@ -55,7 +56,7 @@ public class UserModel implements UserDetails {
     private List<Role> roles = new ArrayList<>();
 
     public static UserModel parse(UserTO userTO) {
-        return new UserModel(null, userTO.getName(), null, userTO.getEmail(), new BCryptPasswordEncoder().encode(userTO.getPassword()),
+        return new UserModel(null, userTO.getName(), userTO.getLastName(),null, userTO.getEmail(), new BCryptPasswordEncoder().encode(userTO.getPassword()),
                 userTO.getDescription(), userTO.getEntryDate(), userTO.getTools(), new ArrayList<PortfolioModel>(), new ArrayList<>());
     }
 

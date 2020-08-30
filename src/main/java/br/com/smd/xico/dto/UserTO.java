@@ -18,11 +18,12 @@ import lombok.ToString;
 public class UserTO {
     private Long id;
     private String name;
+    private String lastName;
     private String image;
     private String email;
     private String password;
     private String description;
-    private LocalDate entryDate;
+    private String entryDate;
     private List<String> tools;
     private List<PortfolioTO> projects;
     
@@ -30,6 +31,7 @@ public class UserTO {
         return new UserTO(
             userModel.getId(), 
             userModel.getName(),
+            userModel.getLastName(),
             userModel.getImage(),
             userModel.getEmail(), 
             null, 
