@@ -32,16 +32,21 @@ public class PortfolioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Enumerated(EnumType.STRING)
+    private Category category;
     private String title;
     @ElementCollection
     @Column(name="user_id")
     @CollectionTable(name="portfolio_likes", joinColumns = @JoinColumn(name = "portfolio_id")) 
     private List<Long> likes;
+    @ElementCollection
+    @Column(name="user_id")
+    @CollectionTable(name="portfolio_views", joinColumns = @JoinColumn(name = "portfolio_id")) 
+    private List<Long> views;
     private LocalDate date;
     @ElementCollection
     @CollectionTable(name = "portfolio_tags", joinColumns = @JoinColumn(name = "portfolio_id"))
-    @Enumerated(EnumType.STRING)
-    private List<Tag> tags;
+    private List<String> tags;
     @ElementCollection
     @CollectionTable(name = "portfolio_files", joinColumns = @JoinColumn(name = "portfolio_id"))
     private List<String> files;
@@ -49,7 +54,7 @@ public class PortfolioModel {
     private UserModel user;
 
     public static PortfolioModel parse(PortfolioTO pto){
-        return new PortfolioModel(null, pto.getTitle(), new ArrayList<Long>(), pto.getDate(),pto.getTags(), pto.getFiles(),null);
+        return new PortfolioModel(null, pto.getCategory(), pto.getTitle(), new ArrayList<Long>(), new ArrayList<Long>(), pto.getDate(),pto.getTags(), pto.getFiles(),null);
     }
 
 }

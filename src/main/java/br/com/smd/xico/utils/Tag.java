@@ -11,9 +11,9 @@ public enum Tag {
     AUDIOVISUAL("Audiovisual"),
     GAME("Game");
 
-    private String value;
+    private String code;
 
-    Tag(String tag) {
-        this.value = tag;
+    Tag(String code) {
+        this.code = code;
     }
 }

@@ -23,7 +23,7 @@ public class UserController {
 
     @PostMapping(consumes ={"multipart/form-data"})
     public ResponseEntity<?> save(
-        @RequestParam("imagem") MultipartFile image,
+        @RequestParam(value = "imagem", required = false) MultipartFile image,
         @RequestParam("usuario") UserTO userTO
     ){  
         System.out.println(userTO);
