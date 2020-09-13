@@ -41,6 +41,7 @@ public class UserModel implements UserDetails {
     private Long id;
     private String name;
     private String lastName;
+    private String nickname;
     private String image;
     @Column(unique = true)
     private String email;
@@ -56,7 +57,7 @@ public class UserModel implements UserDetails {
     private List<Role> roles = new ArrayList<>();
 
     public static UserModel parse(UserTO userTO) {
-        return new UserModel(null, userTO.getName(), userTO.getLastName(),null, userTO.getEmail(), new BCryptPasswordEncoder().encode(userTO.getPassword()),
+        return new UserModel(null, userTO.getName(), userTO.getLastName(),userTO.getNickname(),null, userTO.getEmail(), new BCryptPasswordEncoder().encode(userTO.getPassword()),
                 userTO.getDescription(), userTO.getEntryDate(), userTO.getTools(), new ArrayList<PortfolioModel>(), new ArrayList<>());
     }
 

@@ -1,5 +1,7 @@
 package br.com.smd.xico.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -51,6 +53,14 @@ public class PortfolioService {
         portfolioModel.setFiles(portfolioTO.getFiles());
         portfolioRespository.save(portfolioModel);
         return ResponseEntity.ok().build();
+	}
+
+	public ResponseEntity<?> findByID(Long portfolioID) {
+        Optional<PortfolioModel> result = this.portfolioRespository.findById(portfolioID);
+        if (!result.isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+        return  ResponseEntity.ok().body(PortfolioTO.parse(result.get()));
 	}
 
 

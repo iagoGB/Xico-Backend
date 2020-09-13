@@ -22,6 +22,12 @@ public class PortfolioController {
     @Autowired 
     private PortfolioService portfolioService;
 
+    
+    @GetMapping("{id}")
+    public ResponseEntity<?> findByID(@PathVariable(value ="id") Long portfolioID){
+        return portfolioService.findByID(portfolioID);
+    }
+    
     @PostMapping(consumes ={"multipart/form-data"})
     public ResponseEntity<?> save(
         @RequestParam("images") MultipartFile[] images,

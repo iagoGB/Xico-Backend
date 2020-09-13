@@ -35,6 +35,7 @@ public class PortfolioModel {
     @Enumerated(EnumType.STRING)
     private Category category;
     private String title;
+    private String description;
     @ElementCollection
     @Column(name="user_id")
     @CollectionTable(name="portfolio_likes", joinColumns = @JoinColumn(name = "portfolio_id")) 
@@ -54,7 +55,7 @@ public class PortfolioModel {
     private UserModel user;
 
     public static PortfolioModel parse(PortfolioTO pto){
-        return new PortfolioModel(null, pto.getCategory(), pto.getTitle(), new ArrayList<Long>(), new ArrayList<Long>(), pto.getDate(),pto.getTags(), pto.getFiles(),null);
+        return new PortfolioModel(null, pto.getCategory(), pto.getTitle(), pto.getDescription(), new ArrayList<Long>(), new ArrayList<Long>(), pto.getDate(),pto.getTags(), pto.getFiles(),null);
     }
 
 }

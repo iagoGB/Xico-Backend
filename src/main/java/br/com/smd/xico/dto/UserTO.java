@@ -19,6 +19,7 @@ public class UserTO {
     private Long id;
     private String name;
     private String lastName;
+    private String nickname;
     private String image;
     private String email;
     private String password;
@@ -32,6 +33,7 @@ public class UserTO {
             userModel.getId(), 
             userModel.getName(),
             userModel.getLastName(),
+            userModel.getNickname(),
             userModel.getImage(),
             userModel.getEmail(), 
             null, 

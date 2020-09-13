@@ -19,9 +19,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PortfolioTO {
+    private Long id;
     private Long userID;
     private Category category;
     private String title;
+    private String description;
     private LocalDate date;
     private List<String> files;
     private List<String> tags;
@@ -30,9 +32,11 @@ public class PortfolioTO {
 
     public static PortfolioTO parse(PortfolioModel portfolioModel){
         return new PortfolioTO (
+            portfolioModel.getId(),
             portfolioModel.getUser().getId(),
             portfolioModel.getCategory(),
             portfolioModel.getTitle(),
+            portfolioModel.getDescription(),
             portfolioModel.getDate() ,
             portfolioModel.getFiles(),
             portfolioModel.getTags() ,
