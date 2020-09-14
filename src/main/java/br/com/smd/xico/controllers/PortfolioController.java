@@ -22,6 +22,10 @@ public class PortfolioController {
     @Autowired 
     private PortfolioService portfolioService;
 
+    @GetMapping
+    public ResponseEntity<?> findAll(){
+        return portfolioService.findAll();
+    }
     
     @GetMapping("{id}")
     public ResponseEntity<?> findByID(@PathVariable(value ="id") Long portfolioID){

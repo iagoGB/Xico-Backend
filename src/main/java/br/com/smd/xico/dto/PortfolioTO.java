@@ -27,6 +27,7 @@ public class PortfolioTO {
     private LocalDate date;
     private List<String> files;
     private List<String> tags;
+    private List<String> tools;
     private List<Long> likes; 
     private List<Long> views;
 
@@ -40,6 +41,7 @@ public class PortfolioTO {
             portfolioModel.getDate() ,
             portfolioModel.getFiles(),
             portfolioModel.getTags() ,
+            portfolioModel.getTools(),
             portfolioModel.getLikes(),
             portfolioModel.getViews()
         );

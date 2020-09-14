@@ -63,5 +63,9 @@ public class PortfolioService {
         return  ResponseEntity.ok().body(PortfolioTO.parse(result.get()));
 	}
 
+	public ResponseEntity<?> findAll() {
+		return  ResponseEntity.ok().body( PortfolioTO.parse(portfolioRespository.findAll()));
+	}
+
 
 }
