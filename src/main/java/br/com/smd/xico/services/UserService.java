@@ -18,6 +18,7 @@ public class UserService {
     private UserRepository userRepository;
     @Value("${profile.images.http.folder}")
     private String PROFILEHTTPPATH;
+    private String newImage = null;
 
     public ResponseEntity<?> save(MultipartFile image, UserTO userTO){
         var userModel = UserModel.parse(userTO);
@@ -35,7 +36,16 @@ public class UserService {
         else return ResponseEntity.notFound().build();
 	}
 
-	public ResponseEntity<?> update(Long userID, UserTO userTO) {
+	public ResponseEntity<?> update(Long userID, UserTO userTO, MultipartFile image) {
+
+        if (image != null){
+            // Enviou uma foto para atualizar
+            System.out.println("Atualizar imagem");
+            newImage = s3storageService.salvarImagem(image, userTO.getId(), this.PROFILEHTTPPATH);
+        } else {
+            System.out.println("Não veio nova imagem");
+        }
+
         return userRepository.findById(userID)
             .map(record -> {
                 record.setName(userTO.getName());
@@ -47,6 +57,8 @@ public class UserService {
                 record.setIg(userTO.getIg());
                 record.setDescription(userTO.getDescription());
                 record.setTools(userTO.getTools());
+                if (newImage != null)
+                    record.setImage(newImage);
                 var updated = userRepository.save(record);
                 return ResponseEntity.ok().body(UserTO.parse(updated));
             }).orElse(ResponseEntity.notFound().build());

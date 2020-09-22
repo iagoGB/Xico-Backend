@@ -40,10 +40,11 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(
-        @PathVariable(value ="id") Long userID,
-        @RequestBody UserTO userTO
+        @RequestParam(value = "imagem", required = false) MultipartFile image,
+        @RequestParam("usuario") UserTO userTO,
+        @PathVariable(value ="id") Long userID
     ){
-        return userService.update(userID,userTO);
+        return userService.update(userID,userTO, image);
     }
 
     @DeleteMapping("/{id}")
