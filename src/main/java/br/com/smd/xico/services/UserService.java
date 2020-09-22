@@ -35,4 +35,30 @@ public class UserService {
         else return ResponseEntity.notFound().build();
 	}
 
+	public ResponseEntity<?> update(Long userID, UserTO userTO) {
+        return userRepository.findById(userID)
+            .map(record -> {
+                record.setName(userTO.getName());
+                record.setLastName(userTO.getLastName());
+                record.setEmail(userTO.getEmail());
+                record.setNickname(userTO.getNickname());
+                record.setEntryDate(userTO.getEntryDate());
+                record.setFb(userTO.getFb());
+                record.setIg(userTO.getIg());
+                record.setDescription(userTO.getDescription());
+                record.setTools(userTO.getTools());
+                var updated = userRepository.save(record);
+                return ResponseEntity.ok().body(UserTO.parse(updated));
+            }).orElse(ResponseEntity.notFound().build());
+    }
+    
+    public ResponseEntity <?> delete(Long id) {
+        return userRepository.findById(id)
+                .map(record -> {
+                    userRepository.deleteById(id);
+                    return ResponseEntity.ok().build();
+                }).orElse(ResponseEntity.notFound().build());
+    }
+
+
 }

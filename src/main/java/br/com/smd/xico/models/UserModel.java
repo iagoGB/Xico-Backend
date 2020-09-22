@@ -49,16 +49,21 @@ public class UserModel implements UserDetails {
     private String description;
     private String entryDate;
     @ElementCollection
+    @CollectionTable(name = "user_interests", joinColumns = @JoinColumn(name = "user_id"))
+    private List<String> interests;
+    private String fb;
+    private String ig;
+    @ElementCollection
     @CollectionTable(name = "user_tools", joinColumns = @JoinColumn(name = "user_id"))
     private List<String> tools;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<PortfolioModel> projects;
     @ManyToMany
     private List<Role> roles = new ArrayList<>();
 
     public static UserModel parse(UserTO userTO) {
         return new UserModel(null, userTO.getName(), userTO.getLastName(),userTO.getNickname(),null, userTO.getEmail(), new BCryptPasswordEncoder().encode(userTO.getPassword()),
-                userTO.getDescription(), userTO.getEntryDate(), userTO.getTools(), new ArrayList<PortfolioModel>(), new ArrayList<>());
+                userTO.getDescription(), userTO.getEntryDate(), userTO.getInterests(), userTO.getFb(), userTO.getIg(), userTO.getTools(), new ArrayList<PortfolioModel>(), new ArrayList<>());
     }
 
     @Override

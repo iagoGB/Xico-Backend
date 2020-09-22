@@ -25,6 +25,9 @@ public class UserTO {
     private String password;
     private String description;
     private String entryDate;
+    private List<String> interests;
+    private String fb;
+    private String ig;
     private List<String> tools;
     private List<PortfolioTO> projects;
     
@@ -38,7 +41,10 @@ public class UserTO {
             userModel.getEmail(), 
             null, 
             userModel.getDescription(),
-            userModel.getEntryDate(), 
+            userModel.getEntryDate(),
+            userModel.getInterests(),
+            userModel.getFb(),
+            userModel.getIg(), 
             userModel.getTools(), 
             PortfolioTO.parse(userModel.getProjects())
         );
