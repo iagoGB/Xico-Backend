@@ -37,8 +37,9 @@ public class PortfolioModel {
     private String description;
     @ElementCollection
     @Column(name="user_id")
-    @CollectionTable(name="portfolio_likes", joinColumns = @JoinColumn(name = "portfolio_id")) 
-    private List<Long> likes;
+    @CollectionTable(name="portfolio_tanners", joinColumns = @JoinColumn(name = "portfolio_id")) 
+    private List<Long> tanners;
+    private Long likes;
     // @ElementCollection
     // @Column(name="user_id")
     // @CollectionTable(name="portfolio_views", joinColumns = @JoinColumn(name = "portfolio_id")) 
@@ -57,7 +58,20 @@ public class PortfolioModel {
     private UserModel user;
 
     public static PortfolioModel parse(PortfolioTO pto){
-        return new PortfolioModel(null, pto.getCategory(), pto.getTitle(), pto.getDescription(), new ArrayList<Long>(), pto.getViews(), pto.getDate(),pto.getTags(), pto.getTools(),pto.getFiles(),null);
+        return new PortfolioModel(
+            null, 
+            pto.getCategory(),
+            pto.getTitle(), 
+            pto.getDescription(), 
+            new ArrayList<Long>(), 
+            pto.getLikes(),
+            pto.getViews(), 
+            pto.getDate(),
+            pto.getTags(),
+            pto.getTools(),
+            pto.getFiles(),
+            null
+        );
     }
 
 }

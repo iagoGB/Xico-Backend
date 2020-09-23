@@ -62,4 +62,14 @@ public class PortfolioController {
     ){
         return portfolioService.updateViews(portfolioID);
     }
+
+    @PutMapping("/{id}/likes")
+    public ResponseEntity<?> updateLikes( 
+        @PathVariable(value ="id") Long portfolioID,
+        @RequestParam("tanner") Long tannerID
+    ){
+        return portfolioService.updateLikes(portfolioID,tannerID);
+    }
+
+
 }

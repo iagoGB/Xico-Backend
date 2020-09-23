@@ -27,7 +27,8 @@ public class PortfolioTO {
     private List<String> files;
     private List<String> tags;
     private List<String> tools;
-    private List<Long> likes; 
+    private List<Long> tanners; 
+    private Long likes;
     private Long views;
 
     public static PortfolioTO parse(PortfolioModel portfolioModel){
@@ -41,6 +42,7 @@ public class PortfolioTO {
             portfolioModel.getFiles(),
             portfolioModel.getTags() ,
             portfolioModel.getTools(),
+            portfolioModel.getTanners(),
             portfolioModel.getLikes(),
             portfolioModel.getViews()
         );

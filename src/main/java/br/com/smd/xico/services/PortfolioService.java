@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.com.smd.xico.dto.PortfolioTO;
 import br.com.smd.xico.models.PortfolioModel;
+import br.com.smd.xico.models.UserModel;
 import br.com.smd.xico.repositories.PortfolioRespository;
 import br.com.smd.xico.repositories.UserRepository;
 
@@ -67,6 +68,7 @@ public class PortfolioService {
 		return  ResponseEntity.ok().body( PortfolioTO.parse(portfolioRespository.findAll()));
 	}
 
+    @Transactional
 	public ResponseEntity<?> updateViews(Long portfolioID) {
         return portfolioRespository.findById(portfolioID)
         .map(record -> {
@@ -76,7 +78,36 @@ public class PortfolioService {
             portfolioRespository.save(record);
             return ResponseEntity.ok().build();
         }).orElse(ResponseEntity.notFound().build());
+    }
+    
+    @Transactional
+	public ResponseEntity<?> updateLikes(Long portfolioID, Long tannerID) {
+        return userRepository.findById(tannerID)
+        .map( user -> {
+            return updateLike(portfolioID, user);
+        }).orElse(ResponseEntity.notFound().build());
 	}
+
+    private ResponseEntity<?> updateLike(Long portfolioID, UserModel user) {
+        return portfolioRespository.findById(portfolioID)
+        .map( portfolio -> {
+            if (portfolio.getLikes() == null )
+                portfolio.setLikes((long) 0);
+             
+            if (portfolio.getTanners().contains(user.getId())){
+                portfolio.getTanners().remove(user.getId());
+                portfolio.setLikes(portfolio.getLikes() - 1);
+
+            } else {
+                portfolio.getTanners().add(user.getId());
+                portfolio.setLikes(portfolio.getLikes() + 1);
+            }
+
+            portfolioRespository.save(portfolio);
+            return ResponseEntity.ok().build();
+
+        }).orElse(ResponseEntity.notFound().build());
+    }
 
 
 }
