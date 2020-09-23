@@ -55,4 +55,11 @@ public class PortfolioController {
     ){
         return portfolioService.update(portfolioID,portfolioTO);
     }
+
+    @PutMapping("/{id}/views")
+    public ResponseEntity<?> updateViews( 
+        @PathVariable(value ="id") Long portfolioID
+    ){
+        return portfolioService.updateViews(portfolioID);
+    }
 }

@@ -6,7 +6,6 @@ import java.util.List;
 
 import br.com.smd.xico.models.Category;
 import br.com.smd.xico.models.PortfolioModel;
-import br.com.smd.xico.utils.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,7 +28,7 @@ public class PortfolioTO {
     private List<String> tags;
     private List<String> tools;
     private List<Long> likes; 
-    private List<Long> views;
+    private Long views;
 
     public static PortfolioTO parse(PortfolioModel portfolioModel){
         return new PortfolioTO (

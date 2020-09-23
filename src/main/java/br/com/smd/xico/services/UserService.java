@@ -40,11 +40,8 @@ public class UserService {
 
         if (image != null){
             // Enviou uma foto para atualizar
-            System.out.println("Atualizar imagem");
             newImage = s3storageService.salvarImagem(image, userTO.getId(), this.PROFILEHTTPPATH);
-        } else {
-            System.out.println("Não veio nova imagem");
-        }
+        } 
 
         return userRepository.findById(userID)
             .map(record -> {

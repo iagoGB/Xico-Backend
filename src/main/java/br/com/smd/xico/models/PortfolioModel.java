@@ -17,7 +17,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import br.com.smd.xico.dto.PortfolioTO;
-import br.com.smd.xico.utils.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,10 +39,10 @@ public class PortfolioModel {
     @Column(name="user_id")
     @CollectionTable(name="portfolio_likes", joinColumns = @JoinColumn(name = "portfolio_id")) 
     private List<Long> likes;
-    @ElementCollection
-    @Column(name="user_id")
-    @CollectionTable(name="portfolio_views", joinColumns = @JoinColumn(name = "portfolio_id")) 
-    private List<Long> views;
+    // @ElementCollection
+    // @Column(name="user_id")
+    // @CollectionTable(name="portfolio_views", joinColumns = @JoinColumn(name = "portfolio_id")) 
+    private Long views;
     private LocalDate date;
     @ElementCollection
     @CollectionTable(name = "portfolio_tags", joinColumns = @JoinColumn(name = "portfolio_id"))
@@ -58,7 +57,7 @@ public class PortfolioModel {
     private UserModel user;
 
     public static PortfolioModel parse(PortfolioTO pto){
-        return new PortfolioModel(null, pto.getCategory(), pto.getTitle(), pto.getDescription(), new ArrayList<Long>(), new ArrayList<Long>(), pto.getDate(),pto.getTags(), pto.getTools(),pto.getFiles(),null);
+        return new PortfolioModel(null, pto.getCategory(), pto.getTitle(), pto.getDescription(), new ArrayList<Long>(), pto.getViews(), pto.getDate(),pto.getTags(), pto.getTools(),pto.getFiles(),null);
     }
 
 }

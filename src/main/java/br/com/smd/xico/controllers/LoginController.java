@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
     @RequestMapping("/login")
 	public String home() {
-		return "Hello World! \n Welcome to CASa Móvel API";
+		return "Hello World! \n Welcome to Xico API";
 		
 	} 
 }

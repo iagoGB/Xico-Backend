@@ -67,5 +67,16 @@ public class PortfolioService {
 		return  ResponseEntity.ok().body( PortfolioTO.parse(portfolioRespository.findAll()));
 	}
 
+	public ResponseEntity<?> updateViews(Long portfolioID) {
+        return portfolioRespository.findById(portfolioID)
+        .map(record -> {
+            if (record.getViews() == null)
+                record.setViews((long) 0);
+            record.setViews(record.getViews() + 1);
+            portfolioRespository.save(record);
+            return ResponseEntity.ok().build();
+        }).orElse(ResponseEntity.notFound().build());
+	}
+
 
 }

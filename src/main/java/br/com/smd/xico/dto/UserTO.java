@@ -1,6 +1,5 @@
 package br.com.smd.xico.dto;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import br.com.smd.xico.models.UserModel;

@@ -1,7 +1,6 @@
 package br.com.smd.xico.services;
 
 import java.io.FileNotFoundException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -69,9 +68,6 @@ public class S3StorageService  {
         return resourceUrl;
     }
 
-    private boolean directoryExists(Path basePath) {
-        return Files.exists(basePath);
-    }
 
     public ResponseEntity<?> getResource(Long portfolioID, String filename, String directory) {
         Path targetPath = Paths.get(directory + "\\" + portfolioID + "\\" + filename);
