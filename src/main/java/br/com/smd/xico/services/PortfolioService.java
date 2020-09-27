@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.smd.xico.dto.PortfolioTO;
+import br.com.smd.xico.dto.TagTO;
 import br.com.smd.xico.models.PortfolioModel;
 import br.com.smd.xico.models.UserModel;
 import br.com.smd.xico.repositories.PortfolioRespository;
@@ -108,6 +109,29 @@ public class PortfolioService {
 
         }).orElse(ResponseEntity.notFound().build());
     }
+
+	public ResponseEntity<?> findByTool(String tool) {
+		return ResponseEntity.ok().body(PortfolioTO.parse(portfolioRespository.findAllByToolsEquals(tool)));
+	}
+
+	public ResponseEntity<?> findByMoreViews() {
+        return ResponseEntity.ok().body(PortfolioTO.parse(portfolioRespository.findAllByOrderByViewsDesc()));
+
+	}
+
+	public ResponseEntity<?> findByMoreLikes() {
+        return ResponseEntity.ok().body(PortfolioTO.parse(portfolioRespository.findAllByOrderByLikesDesc()));
+
+	}
+
+	public ResponseEntity<?> findByTag(TagTO tag) {
+        return ResponseEntity.ok().body(PortfolioTO.parse(portfolioRespository.findAllByTagsEquals(tag.getValue())));
+	}
+
+	public ResponseEntity<?> findByDate() {
+        return ResponseEntity.ok().body(PortfolioTO.parse(portfolioRespository.findAllByOrderByDateDesc()));
+
+	}
 
 
 }
