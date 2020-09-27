@@ -39,6 +39,11 @@ public class PortfolioController {
         return portfolioService.findByTag(tag);
     }
 
+    @PostMapping("/title")
+    public ResponseEntity<?> findByTitle(@RequestBody TagTO title) {
+        return portfolioService.findByTitle(title.getValue());
+    }
+
     
     @GetMapping("/moreRecents")
     public ResponseEntity<?> findByNews() {

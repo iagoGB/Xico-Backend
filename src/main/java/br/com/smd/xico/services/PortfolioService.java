@@ -130,7 +130,10 @@ public class PortfolioService {
 
 	public ResponseEntity<?> findByDate() {
         return ResponseEntity.ok().body(PortfolioTO.parse(portfolioRespository.findAllByOrderByDateDesc()));
-
+    }
+    
+    public ResponseEntity<?> findByTitle(String title) {
+        return ResponseEntity.ok().body(PortfolioTO.parse(portfolioRespository.findAllByTitleContainsIgnoreCase(title)));
 	}
 
 
