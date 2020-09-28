@@ -49,12 +49,27 @@ public class PortfolioService {
 		return s3storageService.getResource( portfolioID, filename, this.PORTFOLIOSTORAGEPATH);
 	}
 
-	public ResponseEntity<?> update(Long portfolioID, PortfolioTO portfolioTO) {
-        var findById = portfolioRespository.findById(portfolioID);
-        var portfolioModel = findById.get();
-        portfolioModel.setFiles(portfolioTO.getFiles());
-        portfolioRespository.save(portfolioModel);
-        return ResponseEntity.ok().build();
+	public ResponseEntity<?> update(Long portfolioID, PortfolioTO portfolioTO, MultipartFile[] images) {
+
+        return  portfolioRespository.findById(portfolioID)
+        .map(record -> {
+            record.setTags(portfolioTO.getTags());
+            record.setTools(portfolioTO.getTools());
+            record.setTitle(portfolioTO.getTitle());
+            record.setDescription(portfolioTO.getDescription());
+            record.setFiles(portfolioTO.getFiles());
+
+            if (images != null){
+                //Tem mais imagens a acrescentar
+                for (MultipartFile image : images) {
+                    String imageSavedPath = s3storageService.salvarImagem(image, record.getId(), this.PORTFOLIOSTORAGEPATH);
+                    record.getFiles().add(imageSavedPath);
+                }
+            };
+            record.getFiles().forEach(e -> System.out.println(e));
+            portfolioRespository.save(record);
+            return ResponseEntity.ok().build();
+        }).orElse(ResponseEntity.notFound().build());
 	}
 
 	public ResponseEntity<?> findByID(Long portfolioID) {

@@ -85,9 +85,10 @@ public class PortfolioController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update( 
         @PathVariable(value ="id") Long portfolioID,
+        @RequestParam(value = "imagens", required = false) MultipartFile[] images,
         @RequestParam("portfolio") PortfolioTO portfolioTO
     ){
-        return portfolioService.update(portfolioID,portfolioTO);
+        return portfolioService.update(portfolioID,portfolioTO,images);
     }
 
     @PutMapping("/{id}/views")
