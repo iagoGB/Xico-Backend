@@ -151,5 +151,15 @@ public class PortfolioService {
         return ResponseEntity.ok().body(PortfolioTO.parse(portfolioRespository.findAllByTitleContainsIgnoreCase(title)));
 	}
 
+	public ResponseEntity<?> delete(Long portfolioID) {
+		return portfolioRespository.findById(portfolioID)
+        .map( portfolio -> {
+            
+            portfolioRespository.delete(portfolio);
+            return ResponseEntity.ok().build();
+
+        }).orElse(ResponseEntity.notFound().build());
+	}
+
 
 }
