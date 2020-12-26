@@ -46,7 +46,7 @@ public class S3StorageService  {
                 .withRegion(Regions.US_EAST_2)
                 .build();
             List<Bucket> buckets = s3client.listBuckets();
-            var bucketName = buckets.get(0).getName();
+            var bucketName = buckets.get(1).getName();
             var metadata = new ObjectMetadata();
             var fileInputStream = imageFile.getInputStream();
             var targetPath = directory+"/"+resourceID+"/"+imageFile.getOriginalFilename();
